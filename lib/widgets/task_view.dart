@@ -15,25 +15,8 @@ class TaskView extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       tileColor: Colors.grey.shade700,
-      title: Text(task.title,
-          style: TextStyle(
-              decoration: task.isDone
-                  ? TextDecoration.lineThrough
-                  : TextDecoration.none,
-              decorationColor: Colors.red,
-              decorationStyle: TextDecorationStyle.solid,
-              decorationThickness: 2.85,
-              color: Colors.white)),
-      subtitle: Text(
-        task.description,
-        style: TextStyle(
-            decoration:
-                task.isDone ? TextDecoration.lineThrough : TextDecoration.none,
-            decorationColor: Colors.red,
-            decorationStyle: TextDecorationStyle.solid,
-            decorationThickness: 2.85,
-            color: Colors.white),
-      ),
+      title: Text(task.title, style: getTextStyle()),
+      subtitle: Text(task.description, style: getTextStyle()),
       leading: Checkbox(
         value: task.isDone,
         onChanged: (value) => onChanged(value ?? false),
@@ -52,5 +35,15 @@ class TaskView extends StatelessWidget {
         },
       ),
     );
+  }
+
+  getTextStyle() {
+    return TextStyle(
+        decoration:
+            task.isDone ? TextDecoration.lineThrough : TextDecoration.none,
+        decorationColor: Colors.red,
+        decorationStyle: TextDecorationStyle.solid,
+        decorationThickness: 2.85,
+        color: task.isDone ? Colors.grey : Colors.white);
   }
 }

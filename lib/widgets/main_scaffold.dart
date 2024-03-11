@@ -27,7 +27,7 @@ class _MainScaffoldState extends State {
         elevation: 2,
         shape: const CircleBorder(),
         onPressed: () {
-          _showDialog(context);
+          showDialog(context: context, builder: (context) => const AddTask());
         },
         child: const Icon(Icons.add),
       ),
@@ -83,9 +83,5 @@ class _MainScaffoldState extends State {
         );
       },
     );
-  }
-
-  _showDialog(BuildContext context) {
-    showDialog(context: context, builder: (context) => const AddTask());
   }
 }
