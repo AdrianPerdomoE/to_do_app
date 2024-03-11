@@ -27,13 +27,29 @@ class _MainScaffoldState extends State {
         elevation: 2,
         shape: const CircleBorder(),
         onPressed: () {
-          showDialog(context: context, builder: (context) => const AddTask());
+          showDialog(
+              context: context,
+              builder: (context) => AddTask(
+                    add: addTaskToList,
+                  ));
         },
         child: const Icon(Icons.add),
       ),
       appBar: _appBar(),
       body: _body(),
     );
+  }
+
+  void addTaskToList(String title, String description) {
+    setState(() {
+      taskList.add(Task(description: description, title: title, isDone: false));
+    });
+  }
+
+  void deleteTask(int index) {
+    setState(() {
+      taskList.removeAt(index);
+    });
   }
 
   AppBar _appBar() {
@@ -70,10 +86,15 @@ class _MainScaffoldState extends State {
   }
 
   Widget createList() {
-    return ListView.builder(
+    return ListView.separated(
+      separatorBuilder: (context, index) => const SizedBox(
+        height: 10,
+      ),
       itemCount: taskList.length,
       itemBuilder: (context, index) {
         return TaskView(
+          index: index,
+          onDelete: deleteTask,
           task: taskList[index],
           onChanged: (value) {
             setState(() {

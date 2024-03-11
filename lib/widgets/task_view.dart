@@ -4,8 +4,15 @@ import '../models/task.dart';
 
 class TaskView extends StatelessWidget {
   Task task;
+  Function(int index) onDelete;
   Function(bool) onChanged;
-  TaskView({super.key, required this.task, required this.onChanged});
+  int index;
+  TaskView(
+      {super.key,
+      required this.task,
+      required this.onChanged,
+      required this.onDelete,
+      required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +35,9 @@ class TaskView extends StatelessWidget {
             const PopupMenuItem(
               child: Center(child: Icon(Icons.edit)),
             ),
-            const PopupMenuItem(
-              child: Center(child: Icon(Icons.delete)),
+            PopupMenuItem(
+              onTap: () => onDelete(index),
+              child: const Center(child: Icon(Icons.delete)),
             ),
           ];
         },
