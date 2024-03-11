@@ -1,28 +1,35 @@
 import 'package:flutter/material.dart';
 
-class AddTask extends StatefulWidget {
-  Function(String title, String description) add;
-  AddTask({super.key, required this.add});
+import '../models/task.dart';
+
+class EditTask extends StatefulWidget {
+  Task currentTask;
+  EditTask({super.key, required this.currentTask});
 
   @override
-  State<AddTask> createState() => _AddTaskState();
+  State<EditTask> createState() => _EditTaskState();
 }
 
-class _AddTaskState extends State<AddTask> {
-  String title = "";
-  String description = "";
+class _EditTaskState extends State<EditTask> {
+  late String title;
+  late String description;
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      title = widget.currentTask.title;
+      description = widget.currentTask.description;
+    });
     return AlertDialog(
-      title: const Text('Añadir tarea'),
+      title: const Text('Editar tarea'),
       content: SizedBox(
         height: 150,
         child: Form(
           key: _formKey,
           child: Column(children: [
             TextFormField(
+              initialValue: title,
               validator: (value) => validateInput(value!),
               onSaved: (newValue) {
                 title = newValue!;
@@ -31,6 +38,7 @@ class _AddTaskState extends State<AddTask> {
                   hintText: "Ingresa un titulo", label: Text('Titulo')),
             ),
             TextFormField(
+              initialValue: description,
               validator: (value) => validateInput(value!),
               onSaved: (newValue) {
                 description = newValue!;
@@ -54,11 +62,14 @@ class _AddTaskState extends State<AddTask> {
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               _formKey.currentState!.save();
-              widget.add(title, description);
+              setState(() {
+                widget.currentTask.description = description;
+                widget.currentTask.title = title;
+              });
               Navigator.pop(context);
             }
           },
-          child: const Text('Agregar'),
+          child: const Text('Guardar'),
         ),
       ],
     );

@@ -13,9 +13,7 @@ class MainScaffold extends StatefulWidget {
 }
 
 class _MainScaffoldState extends State {
-  List<Task> taskList = [
-    Task(description: "una tarea", isDone: false, title: "titulo")
-  ];
+  List<Task> taskList = [];
   late double width;
   late double height;
   @override
@@ -86,6 +84,12 @@ class _MainScaffoldState extends State {
   }
 
   Widget createList() {
+    if (taskList.isEmpty)
+      return const Center(
+          child: Text(
+        'No hay tareas',
+        style: TextStyle(color: Colors.white, fontSize: 20),
+      ));
     return ListView.separated(
       separatorBuilder: (context, index) => const SizedBox(
         height: 10,

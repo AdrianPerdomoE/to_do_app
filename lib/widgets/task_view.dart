@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_app/widgets/edit_task.dart';
 
 import '../models/task.dart';
 
@@ -32,8 +33,13 @@ class TaskView extends StatelessWidget {
         offset: const Offset(-25, 40),
         itemBuilder: (BuildContext context) {
           return [
-            const PopupMenuItem(
-              child: Center(child: Icon(Icons.edit)),
+            PopupMenuItem(
+              onTap: () => showDialog(
+                  context: context,
+                  builder: (context) {
+                    return EditTask(currentTask: task);
+                  }),
+              child: const Center(child: Icon(Icons.edit)),
             ),
             PopupMenuItem(
               onTap: () => onDelete(index),
