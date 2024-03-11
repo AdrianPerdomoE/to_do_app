@@ -10,6 +10,11 @@ class TaskView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: const EdgeInsets.all(5),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      tileColor: Colors.grey.shade700,
       title: Text(task.title,
           style: TextStyle(
               decoration: task.isDone

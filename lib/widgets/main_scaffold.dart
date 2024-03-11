@@ -60,6 +60,7 @@ class _MainScaffoldState extends State {
         children: [
           Container(
             height: height * 0.8,
+            margin: EdgeInsets.only(top: height * 0.05),
             padding: EdgeInsets.symmetric(horizontal: width * 0.05),
             child: createList(),
           )
