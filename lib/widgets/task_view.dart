@@ -17,36 +17,40 @@ class TaskView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: const EdgeInsets.all(5),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      tileColor: Colors.grey.shade700,
-      title: Text(task.title, style: getTextStyle()),
-      subtitle: Text(task.description, style: getTextStyle()),
-      leading: Checkbox(
-        value: task.isDone,
-        onChanged: (value) => onChanged(value ?? false),
-      ),
-      trailing: PopupMenuButton(
-        offset: const Offset(-25, 40),
-        itemBuilder: (BuildContext context) {
-          return [
-            PopupMenuItem(
-              onTap: () => showDialog(
-                  context: context,
-                  builder: (context) {
-                    return EditTask(currentTask: task);
-                  }),
-              child: const Center(child: Icon(Icons.edit)),
-            ),
-            PopupMenuItem(
-              onTap: () => onDelete(index),
-              child: const Center(child: Icon(Icons.delete)),
-            ),
-          ];
-        },
+    double width = MediaQuery.of(context).size.width;
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: width * 0.03),
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(5),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        tileColor: Colors.grey.shade700,
+        title: Text(task.title, style: getTextStyle()),
+        subtitle: Text(task.description, style: getTextStyle()),
+        leading: Checkbox(
+          value: task.isDone,
+          onChanged: (value) => onChanged(value ?? false),
+        ),
+        trailing: PopupMenuButton(
+          offset: const Offset(-25, 40),
+          itemBuilder: (BuildContext context) {
+            return [
+              PopupMenuItem(
+                onTap: () => showDialog(
+                    context: context,
+                    builder: (context) {
+                      return EditTask(currentTask: task);
+                    }),
+                child: const Center(child: Icon(Icons.edit)),
+              ),
+              PopupMenuItem(
+                onTap: () => onDelete(index),
+                child: const Center(child: Icon(Icons.delete)),
+              ),
+            ];
+          },
+        ),
       ),
     );
   }

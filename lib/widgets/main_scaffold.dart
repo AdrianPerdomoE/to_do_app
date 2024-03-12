@@ -72,10 +72,10 @@ class _MainScaffoldState extends State {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            height: height * 0.8,
-            margin: EdgeInsets.only(top: height * 0.05),
-            padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+          SizedBox(
+            height: height * 0.05,
+          ),
+          Expanded(
             child: createList(),
           )
         ],
@@ -84,12 +84,14 @@ class _MainScaffoldState extends State {
   }
 
   Widget createList() {
-    if (taskList.isEmpty)
+    if (taskList.isEmpty) {
       return const Center(
           child: Text(
         'No hay tareas',
         style: TextStyle(color: Colors.white, fontSize: 20),
       ));
+    }
+
     return ListView.separated(
       separatorBuilder: (context, index) => const SizedBox(
         height: 10,
