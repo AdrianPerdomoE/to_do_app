@@ -41,6 +41,7 @@ class _MainScaffoldState extends State {
   }
 
   void addTaskToList(String title, String description) {
+    //se conecta la funcion previa con la nueva funcion de la db para agregar una tarea
     setState(() {
       _taskDatabase
           .addTask(Task(description: description, title: title, isDone: false));
@@ -94,6 +95,7 @@ class _MainScaffoldState extends State {
 
   Widget createList() {
     return StreamBuilder(
+        //se utiliza el streambuilder para actualizar la lista de tareas en tiempo real
         stream: taskList,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
