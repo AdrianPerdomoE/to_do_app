@@ -4,7 +4,8 @@ import '../models/task.dart';
 
 class EditTask extends StatefulWidget {
   Task currentTask;
-  EditTask({super.key, required this.currentTask});
+  Function(Task change) update;
+  EditTask({super.key, required this.currentTask, required this.update});
 
   @override
   State<EditTask> createState() => _EditTaskState();
@@ -65,6 +66,7 @@ class _EditTaskState extends State<EditTask> {
               setState(() {
                 widget.currentTask.description = description;
                 widget.currentTask.title = title;
+                widget.update(widget.currentTask);
               });
               Navigator.pop(context);
             }

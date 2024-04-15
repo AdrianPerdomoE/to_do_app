@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'widgets/main_scaffold.dart';
 
 void main() {
-  runApp(const MainApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp().then((value) => runApp(const MainApp()));
 }
 
 class MainApp extends StatelessWidget {
